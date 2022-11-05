@@ -3,12 +3,26 @@ const Producto = require('../models/Producto');
 
 const getProductos = async (req, res = response) => {
 
-    const productos = await Producto.find()
-                                    .populate('usuario', 'nombre img')
+    const desde = Number(req.query.desde) || 0;
+    
+    const [productos, total] = await Promise.all([
+        Producto
+            .find({}, 'nombre modelo marca km año precio img')
+            .skip( desde )
+            .limit( 5 ),
+        Producto
+            .countDocuments(),
+        
+    ])
+
+    /* const productos = await Producto.find()
+                                    .populate('producto', 'nombre') */
 
     res.json({
         ok: true,
-        productos
+        productos,
+        uid: req.uid,
+        total
     })
 }
 

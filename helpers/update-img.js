@@ -1,6 +1,5 @@
 const Usuario = require('../models/usuario');
-const Medico = require('../models/medico');
-const Hospital = require('../models/hospital');
+const Producto = require('../models/Producto');
 const fs = require('fs');
 
 const deleteImagen = ( path ) =>{
@@ -9,34 +8,21 @@ const deleteImagen = ( path ) =>{
                 fs.unlinkSync( path )
             }
 }
-let pathViejo = '';
+
 const updateImg = async (tipo, id, nombreArchivo) => {
 
     switch ( tipo ) {
-        case 'medicos':
-            const medico = await Medico.findById( id );
-            if ( !medico) {
+        case 'productos':
+            const producto = await Producto.findById( id );
+            if ( !producto) {
                 console.log('no es un medico id')
                 return false;
             }
-            pathViejo = `./uploads/medicos/${ medico.img }`;
+            const pathViejo = `./uploads/productos/${ producto.img }`;
             deleteImagen( pathViejo );
 
-            medico.img = nombreArchivo;
-            await medico.save();
-            return true;
-            break;
-        case 'hospitales':
-            const hospital = await Hospital.findById( id );
-            if ( !hospital) {
-                console.log('no es un hospital id')
-                return false;
-            }
-            pathViejo = `./uploads hospitales/${ hospital.img }`;
-            deleteImagen( pathViejo );
-
-         hospital.img = nombreArchivo;
-            await hospital.save();
+            producto.img = nombreArchivo;
+            await producto.save();
             return true;
             break;
         case 'usuarios':
