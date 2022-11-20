@@ -57,15 +57,15 @@ const renewToken = async (req, res = response) => {
     });
 }
 const getUsuari = async (req, res) => {
-    const uid = req.uid;
+    const uid  = req.uid;
     //Generar un TOKEN JWT
     const token = await generarJWT( uid );
     try {
-        const usuario = await Usuario.findOne({ uid});
+        const usuario = await Usuario.findById( uid );
         console.log(usuario);
         res.json({ 
             usuario,
-            token 
+            token
         });
     } catch (error) {
         console.log(error);

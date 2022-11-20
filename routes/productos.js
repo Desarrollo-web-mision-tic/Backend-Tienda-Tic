@@ -17,7 +17,6 @@ router.post(
   "/",
   [
     validarJWT,
-    check('id', 'El ID-Prod es obligatorio').not().isEmpty(),
     check('marca', 'La Marca es obligatoria').not().isEmpty(),
     check('modelo', 'El Modelo es obligatorio').not().isEmpty(),
     check('stock', 'El Stock es obligatorio').not().isEmpty(),

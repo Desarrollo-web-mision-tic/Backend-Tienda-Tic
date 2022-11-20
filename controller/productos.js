@@ -7,7 +7,7 @@ const getProductos = async (req, res = response) => {
     
     const [productos, total] = await Promise.all([
         Producto
-            .find({}, 'id nombre modelo stock marca km year precio img')
+            .find({}, 'nombre modelo stock marca km year precio img')
             .skip( desde )
             .limit( 20 ),
         Producto
