@@ -28,7 +28,8 @@ const login = async (req, res = response) => {
 
         res.json({
             ok: true,
-            token
+            token,
+            usuarioDB
         });
 
     } catch (error) {
@@ -47,7 +48,7 @@ const renewToken = async (req, res = response) => {
     //Generar un TOKEN JWT
     const token = await generarJWT( uid );
     //obtener el usuario por id
-    const usuario = await Usuario.findById( uid);
+    const usuario = await Usuario.findById( uid );
 
     res.json({
         ok: true,
@@ -55,8 +56,27 @@ const renewToken = async (req, res = response) => {
         usuario 
     });
 }
+const getUsuari = async (req, res) => {
+    const uid = req.uid;
+    //Generar un TOKEN JWT
+    const token = await generarJWT( uid );
+    try {
+        const usuario = await Usuario.findOne({ uid});
+        console.log(usuario);
+        res.json({ 
+            usuario,
+            token 
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: 'Hubo un error'
+        })
+    }
+}
 
 module.exports = {
     login,
     renewToken,
+    getUsuari
 }

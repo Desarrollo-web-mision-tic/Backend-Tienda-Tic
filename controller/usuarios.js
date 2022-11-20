@@ -15,6 +15,7 @@ const getUsuarios = async (req, res) => {
 
     const total = await Usuario.count();
  */
+
     const [usuarios, total] = await Promise.all([
         Usuario
             .find({}, 'nombre email password role google')
@@ -24,12 +25,16 @@ const getUsuarios = async (req, res) => {
             .countDocuments(),
         
     ])
+    //Generar un TOKEN JWT
+    const token = await generarJWT( usuarios.uid );
 
     res.json({
         ok: true,
         usuarios,
+        token,
         uid: req.uid,
-        total
+        total,
+
     })
 }
 
@@ -42,7 +47,7 @@ const crearUsuario = async (req, res = response) => {
         if (existEmail) {
             return res.status(400).json({
                 ok: false,
-                message: 'Email ya existe'
+                msg: 'Email ya existe'
             })
         }
 
@@ -80,7 +85,7 @@ const updateUsuario = async (req, res) =>{
         if (!usuarioDB) {
             return res.status(400).json({
                 ok: false,
-                message: 'Usuario no encontrado'
+                msg: 'Usuario no encontrado'
             })
         }
 
@@ -91,7 +96,7 @@ const updateUsuario = async (req, res) =>{
             if (existEmail) {
                 return res.status(400).json({
                     ok: false,
-                    message: 'Email ya existe'
+                    msg: 'Email ya existe'
                 })
                 }
             }   
@@ -100,7 +105,7 @@ const updateUsuario = async (req, res) =>{
         
         res.json({
             ok: true,
-            message: 'Usuario updated',
+            msg: 'Usuario updated',
             usuario: usuarioActualizado
         })
     } catch (error) {
@@ -120,14 +125,14 @@ const deleteUsuario = async (req, res = response) => {
         if (!usuarioDB) {
             return res.status(400).json({
                 ok: false,
-                message: 'Usuario no encontrado'
+                msg: 'Usuario no encontrado'
             })
         }
 
         await Usuario.findByIdAndDelete( uid );
         res.json({
             ok: true,
-            message: 'Usuario delete',
+            msg: 'Usuario delete',
         })
 
     } catch (error) {

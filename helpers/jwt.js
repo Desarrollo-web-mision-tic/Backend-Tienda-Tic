@@ -6,7 +6,6 @@ const generarJWT = ( uid ) => {
     return new Promise( ( resolve, reject) =>{
         const payload = {
             uid,
-            role
         };
         jsw.sign( payload, process.env.JWT_SECRET, {
             expiresIn: '24h'

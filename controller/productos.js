@@ -7,9 +7,9 @@ const getProductos = async (req, res = response) => {
     
     const [productos, total] = await Promise.all([
         Producto
-            .find({}, 'nombre modelo marca km año precio img')
+            .find({}, 'id nombre modelo stock marca km year precio img')
             .skip( desde )
-            .limit( 5 ),
+            .limit( 20 ),
         Producto
             .countDocuments(),
         
@@ -38,6 +38,7 @@ const updateProducto = async (req, res = response) => {
                 msg: 'Producto no encontrado por id'
              });
         }
+        console.log(productoDB);
         const cambioProducto = {
             ...req.body,
             usuario: uid
@@ -72,7 +73,7 @@ const createProducto = async (req, res = response) => {
         
         res.json({
             ok: true,
-            msg: 'crear productoes',
+            msg: 'crear productos',
             producto: productoDB,
         });
 

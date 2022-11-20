@@ -17,7 +17,13 @@ router.post(
   "/",
   [
     validarJWT,
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('id', 'El ID-Prod es obligatorio').not().isEmpty(),
+    check('marca', 'La Marca es obligatoria').not().isEmpty(),
+    check('modelo', 'El Modelo es obligatorio').not().isEmpty(),
+    check('stock', 'El Stock es obligatorio').not().isEmpty(),
+    check('km', 'El Km es obligatorio').not().isEmpty(),
+    check('year', 'El Año es obligatorio').not().isEmpty(),
+    check('precio', 'El Precio es obligatorio').not().isEmpty(),
     validarCampos
   ],
   createProducto
@@ -27,7 +33,7 @@ router.put(
   "/:id",
   [
     validarJWT,
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    
     validarCampos,
   ],
   updateProducto
