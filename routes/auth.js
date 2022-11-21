@@ -11,10 +11,6 @@ router.post('/',
     login
 )
 
-/* router.get('/renew',
-    validarJWT,
-    renewToken
-) */
 router.get('/',
     validarJWT,
     getUsuari,
