@@ -9,6 +9,11 @@ const VentaSchema = Schema({
             ],
         ref: "Producto",
     },
+    /* productos: {
+        required: true,
+        type: Schema.Types.ObjectId,
+        ref: "Producto",
+    }, */
     usuario: {
         required: true,
         type: Schema.Types.ObjectId,

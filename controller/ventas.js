@@ -33,6 +33,7 @@ const getVentas = async ( req, res = response ) => {
 
     try {
         const venta = await Venta.find({ usuario: req.uid });
+        console.log(venta);
         res.json({ venta })
     } catch (error) {
         console.log(error);
