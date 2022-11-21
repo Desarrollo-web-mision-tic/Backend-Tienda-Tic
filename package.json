@@ -4,7 +4,6 @@
   "description": "Api rest tienda de autos",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "author": "Diego Andres Salas",
