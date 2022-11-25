@@ -1,5 +1,5 @@
 const Usuario = require('../models/usuario');
-const Producto = require('../models/Producto');
+const Producto = require('../models/producto');
 const fs = require('fs');
 
 const deleteImagen = ( path ) =>{
