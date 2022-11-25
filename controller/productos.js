@@ -1,5 +1,5 @@
 const { response } = require('express');
-const Producto = require('../models/producto.js');
+const Producto = require('../models/Producto');
 
 const getProductos = async (req, res = response) => {
 
