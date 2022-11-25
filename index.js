@@ -8,6 +8,10 @@ const { dbConnection } = require('./database/config');
 // Crear el servidor de express
 const app = express();
 
+//dominios
+const whiteList = ['http://localhost:4000'];
+
+
 // Configurar CORS
 app.use( cors() );
 
@@ -30,6 +34,6 @@ app.use('/api/login', require('./routes/auth') );
 app.use('/api/upload', require('./routes/uploads') );
 
 
-app.listen( process.env.PORT, () => {
+app.listen( process.env.PORT, process.env.HOST, () => {
     console.log('Servidor corriendo en puerto ' + process.env.PORT );
 });
