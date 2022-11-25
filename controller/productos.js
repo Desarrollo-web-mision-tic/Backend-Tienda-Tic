@@ -14,6 +14,7 @@ const getProductos = async (req, res = response) => {
             .countDocuments(),
         
     ])
+    //creando 
 
     /* const productos = await Producto.find()
                                     .populate('producto', 'nombre') */
