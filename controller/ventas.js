@@ -1,6 +1,6 @@
 const { response } = require('express');
 const Venta = require('../models/ventas');
-const Producto = require('../models/Producto');
+const Producto = require('../models/producto');
 
 const postVentas = async ( req, res ) => {
 
